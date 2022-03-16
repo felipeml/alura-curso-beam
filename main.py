@@ -128,7 +128,7 @@ colunas_chuvas = 'data,mm,uf'.split(',')
 dengue = (
     pipeline
     | "Leitura do dataset de dengue" >> 
-        ReadFromText('casos_dengue.txt', skip_header_lines=1)
+        ReadFromText('sample_casos_dengue.txt', skip_header_lines=1)
     | "dengue De texto para lista" >> beam.Map(texto_para_lista)
     | "Converte dengue para dicionario" >> 
         beam.Map(lista_para_dicionario, colunas_dengue)
@@ -143,7 +143,7 @@ dengue = (
 chuvas = (
     pipeline
     | "Leitura do dataset de chuvas" >> 
-        ReadFromText('chuvas.csv', skip_header_lines=1)
+        ReadFromText('sample_chuvas.csv', skip_header_lines=1)
     | "chuvas De texto para lista" >> beam.Map(texto_para_lista, ',')
     | "Cria chave uf-ano-mes" >> beam.Map(chave_uf_ano_mes_de_lista)
     | "Soma qtde de chuva por chave (estado-ano-mes)" >> beam.CombinePerKey(sum)
